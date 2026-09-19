@@ -1,6 +1,6 @@
 {
   "name": "omp-jev-mcp-ranker",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Rank selected MCP tools with TypeSafe Jev before each OMP turn.",
   "type": "module",
   "license": "MIT",

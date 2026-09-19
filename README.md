@@ -1,6 +1,6 @@
 # OMP Jev MCP Ranker
 
-An [Oh My Pi](https://github.com/can1357/oh-my-pi) extension that ranks MCP tools against the current user prompt with [TypeSafe Jev](https://typesafe.ai/). It gives the main agent up to five likely tools without disabling anything else.
+An [Oh My Pi](https://github.com/can1357/oh-my-pi) extension that ranks MCP tools against the current user prompt with [TypeSafe Jev](https://typesafe.ai/). For watched servers, only the five most relevant tools are exposed to the model on that turn.
 
 ## Install
 
@@ -27,9 +27,10 @@ For each submitted prompt, the extension:
 1. collects active tools from the watched MCP servers;
 2. asks Jev whether the request needs MCP and scores each candidate tool;
 3. keeps the five highest scores at or above `0.50`;
-4. adds those names, descriptions, and scores to that turn as hidden advisory context.
+4. removes every other watched-server tool from that model request;
+5. restores the original tool set when the agent run ends.
 
-Jev is pinned to `jev-1.13.0`. A missing key, API error, malformed response, or four-second timeout leaves the normal OMP flow unchanged.
+Jev is pinned to `jev-1.13.0`. A missing key, API error, malformed response, or four-second timeout leaves every tool available. A successful “no relevant tool” result removes all tools from watched servers for that turn.
 
 ## Privacy
 
@@ -59,7 +60,7 @@ bun run selfcheck
 omp --no-extensions -e ./src/mcp-tool-ranker.ts
 ```
 
-The self-check covers server-name parsing, score filtering, and ranking order.
+The self-check covers server-name parsing, score filtering, ranking order, and active-tool filtering.
 
 ## License
 

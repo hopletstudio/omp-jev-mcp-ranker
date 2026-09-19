@@ -1,0 +1,26 @@
+{
+  "name": "omp-jev-mcp-ranker",
+  "version": "0.1.0",
+  "description": "Rank selected MCP tools with TypeSafe Jev before each OMP turn.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hopletstudio/omp-jev-mcp-ranker.git"
+  },
+  "keywords": [
+    "omp",
+    "mcp",
+    "jev",
+    "typesafe",
+    "extension"
+  ],
+  "scripts": {
+    "selfcheck": "bun src/mcp-tool-ranker.ts"
+  },
+  "omp": {
+    "extensions": [
+      "./src/mcp-tool-ranker.ts"
+    ]
+  }
+}
